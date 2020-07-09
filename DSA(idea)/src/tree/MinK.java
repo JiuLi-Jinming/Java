@@ -21,17 +21,17 @@ public class MinK {
         return mink;
     }
 
-    public static void main(String[] args)
-    {
-        // 源数据
-        int[] data = {56,275,12,6,45,478,41,1236,456,12,546,45};
-
-// 获取Min5
-
-        int[] min5 = minK(data, 5);
-
-        for (int i = 0; i < 5; i++) {
-            System.out.println(min5[i]);
-        }
-    }
+//    public static void main(String[] args)
+//    {
+//        // 源数据
+//        int[] data = {56,275,12,6,45,478,41,1236,456,12,546,45};
+//
+//// 获取Min5
+//
+//        int[] min5 = minK(data, 5);
+//
+//        for (int i = 0; i < 5; i++) {
+//            System.out.println(min5[i]);
+//        }
+//    }
 }
