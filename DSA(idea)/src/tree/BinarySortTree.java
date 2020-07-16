@@ -1,46 +1,36 @@
 package tree;
 
-public class BinarySortTree {
-
-    public class Node{
+public class BinarySortTree
+{
+    public class Node
+    {
         int value;
         Node left;
         Node right;
 
-        public Node(int  value)
-        {
+        public Node(int  value) {
             this.value = value;
         }
-        public void add(Node node)
-        {
-            if(node == null)
-            {
+
+        public void add(Node node) {
+            if(node == null) {
                 return;
             }
             //判断传入的节点的值比当前子树的根节点的值大还是小
-            if(node.value < this.value)
-            {
+            if(node.value < this.value) {
                 //如果左节点为空
-                if(this.left == null)
-                {
+                if(this.left == null) {
                     this.left = node;
                 }
-                else
-                {
+                else {
                     this.left.add(node);
                 }
-            }
-            else
-            {
-                if(this.right == null)
-                {
+            } else {
+                if(this.right == null) {
                     this.right =node;
-                }
-                else
-                {
+                } else {
                     this.right.add(node);
                 }
-
             }
         }
 
@@ -50,8 +40,7 @@ public class BinarySortTree {
          */
         public void middleOder(Node node)
         {
-            if(node == null)
-            {
+            if(node == null) {
                 return;
             }
             middleOder(node.left);
@@ -66,41 +55,29 @@ public class BinarySortTree {
          */
         public Node search(int value)
         {
-            if(this.value == value)
-            {
+            if(this.value == value) {
                 return this;
-            }
-            else if(value < this.value)
-            {
-                if(this.left == null)
-                {
+            } else if(value < this.value) {
+                if(this.left == null) {
                     return null;
                 }
                 return this.left.search(value);
-            }
-            else
-            {
-                if(this.right == null)
-                {
+            } else {
+                if(this.right == null) {
                     return null;
                 }
                 return  this.right.search(value);
             }
-
         }
+
         public Node searchParent(int value) {
-            if((this.left != null && this.left.value == value) || (this.right != null && this.right.value == value))
-            {
+            if((this.left != null && this.left.value == value)
+                    || (this.right != null && this.right.value == value)) {
                 return this;
-            }
-            else
-            {
-                if(this.value > value&& this.left != null)
-                {
+            } else {
+                if(this.value > value && this.left != null) {
                     return this.left.searchParent(value);
-                }
-                else if(this.value < value && this.right !=null)
-                {
+                } else if(this.value < value && this.right !=null) {
                     return this.right.searchParent(value);
                 }
             }
@@ -116,93 +93,76 @@ public class BinarySortTree {
      */
     public void add(Node node)
     {
-        if(root == null)
-        {
+        if(root == null) {
             root = node;
-        }
-        else
-        {
+        } else {
             root.add(node);
         }
     }
+
     public void frontShow()
     {
-        if(root != null)
-        {
+        if(root != null) {
             this.root.middleOder(root);
         }
     }
+
     public Node SearchNode(int value)
     {
         if(root == null)
             return null;
-        else
-        {
+        else {
             return root.search(value);
         }
     }
 
-    public void delete(int value) {
+    public void delete(int value)
+    {
         if (root == null)
             return;
-        else
-        {
+        else {
             Node target = SearchNode(value);
             //如果没有这个节点
-            if(target == null)
-            {
+            if(target == null) {
                 return;
             }
             //找到他的父节点
             Node parent = searchParent(value);
             //要删除的节点是叶子结点
-            if(target.left == null && target.right == null)
-            {
+            if(target.left == null && target.right == null) {
                 //要删除的节点是节点的左子节点
-                if(parent.left.value == value)
-                {
+                if(parent.left.value == value) {
                     parent.left =null;
-                }
-                else
-                {
+                } else {
                     parent.right = null;
                 }
             }
             //要删除的节点有两个子节点的情况
-            else if(target.left != null && target.right != null)
-            {
+            else if(target.left != null && target.right != null) {
                 //删除右子树中值最小的节点，并获取到该节点的值
                 int min = minDelete(target.right);
                 //替换目标节点中的值
                 target.value = min;
-            }
-            else
-            {
+            } else {
                 //需要删除的目标节点的左节点不为空
-                if(target.left != null)
-                {
+                if(target.left != null) {
                     //要删除的子节点是其父节点的左子节点，并且有左节点而没有有节点
-                    if(parent.left.value == value)
-                    {
+                    if(parent.left.value == value) {
                         parent.left = target.left;
                     }
                     //要删除的子节点是其父节点的右子节点，并且有左节点而没有有节点
-                    else
-                    {
+                    else {
                         parent.right = target.left;
                     }
                 }
                 //需要删除的目标节点的右节点不为空
-                else
-                {
+                else {
                     //要删除的节点是父节点的左节点，并且有右节点儿没有左节点
-                    if(parent.left.value == value)
-                    {
+                    if(parent.left.value == value) {
                         parent.left = target.right;
                     }
                     //要删除的节点是其父节点的右节点，并且有右孩子没有左孩子
-                    else
-                    {
+                    else {
                         parent.right = target.right;
                     }
                 }
@@ -236,12 +196,9 @@ public class BinarySortTree {
      */
     public Node searchParent(int value)
     {
-        if(root == null)
-        {
+        if(root == null) {
             return null;
-        }
-        else
-        {
+        } else {
             return root.searchParent(value);
         }
     }
