@@ -2,6 +2,7 @@ package string;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 public class StringPratics
 {
@@ -36,4 +37,51 @@ public class StringPratics
         }
         return dp[len];
     }
+
+    /**
+     * 8. 字符串转换整数 (atoi)
+     * https://leetcode-cn.com/problems/string-to-integer-atoi/
+     *
+     * @param str
+     * @return
+     */
+    public static int myAtoi(String str)
+    {
+        int len = str.length();
+        if (len < 1) return 0;
+        int res = 0, start = 0, end = 0, index = 0;
+        boolean negative = false;
+        char[] chars = str.toCharArray();
+
+        while (chars[index] == ' ' && index < len) {
+            index++;
+            if (index == str.length()) return 0;
+        }
+
+        if (chars[index] == '+' && index < len) {
+            index++;
+        } else if (chars[index] == '-' && index < len) {
+            index++;
+            negative = true;
+        } else if (!Character.isDigit(chars[index])) {
+            return 0;
+        }
+
+        while (index < len && Character.isDigit(chars[index])) {
+            int digit = chars[index] - '0';
+            if (res > (Integer.MAX_VALUE-digit) / 10) {
+                return negative ? Integer.MIN_VALUE : Integer.MAX_VALUE;
+            }
+            res = res*10 + digit;
+            index++;
+        }
+        return negative ? (~res+1) : res;
+    }
+
+
+//    public static void main(String[] args) {
+//        String a = "123";
+//        System.out.println(a);
+//        System.out.println(myAtoi(a));
+//    }
 }
