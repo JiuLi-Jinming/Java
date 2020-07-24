@@ -204,7 +204,7 @@ public class dongtaiguihua
      *      第 i + 1 个字符未匹配，则 dp[i + 1] = dp[i] + 1，即不匹配数加 1;
      *      遍历前 i 个字符，若以其中某一个下标 idx 为开头、以第 i + 1 个字符为结尾的字符串正好在词典里，则 dp[i] = min(dp[i], dp[idx]) 更新 dp[i]。
      */
-    public int respace1(String[] dictionary, @NotNull String sentence) {
+    public int reSpace1(String[] dictionary, @NotNull String sentence) {
         Set<String> dict = new HashSet<>(Arrays.asList(dictionary));
         int n = sentence.length();
         int[] dp = new int[n + 1];
@@ -219,7 +219,7 @@ public class dongtaiguihua
         return dp[n];
     }
 
-    public int respace2(String @NotNull [] dictionary, String sentence) {
+    public int reSpace2(String @NotNull [] dictionary, String sentence) {
         // 构建字典树
         Trie trie = new Trie();
         for (String word: dictionary) {
