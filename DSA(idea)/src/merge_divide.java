@@ -32,6 +32,30 @@ public class merge_divide
         return numbers[left];
     }
 
+    public static int midArray(int[] nums)
+    {
+        if (nums.length < 2) return -1;
+        int l = 0, r = nums.length-1;
+
+        while (l < r) {
+            int mid = (l+r) / 2;
+
+            if (nums[mid] > nums[mid-1] && nums[mid] < nums[mid+1]) {
+                l = mid + 1;
+            } else if (nums[mid] < nums[mid-1] && nums[mid] > nums[mid+1]) {
+                r = mid;
+            } else {
+                r--;
+            }
+        }
+        return nums[l];
+    }
+
+    public static void main(String[] args) {
+        int[] a = new int[]{1,2,3,4,5,9,3,2,1,0};
+        System.out.println(midArray(a));
+    }
+
     /**
      * 4. 寻找两个正序数组的中位数
      *
